@@ -10,7 +10,7 @@ const $sidebar = document.querySelector('#sidebar')
 
 //Queries
 const {username, room} = Qs.parse(location.search, {ignoreQueryPrefix: true})
-console.log(username, room)
+//console.log(username, room)
 
 // Templates
 const messageTemplate = document.querySelector('#message-template').innerHTML
@@ -41,7 +41,7 @@ const autoScroll = () => {
 }
 
 socket.on('message', (message) => {
-    console.log(message)
+    //console.log(message)
     const html = Mustache.render(messageTemplate, {
         username: message.username,
         message: message.text,
@@ -52,7 +52,7 @@ socket.on('message', (message) => {
 })
 
 socket.on('locationMessage', (message) => {
-    console.log(message)
+    //console.log(message)
     const html = Mustache.render(locationMessageTemplate, {
         username: message.username,
         url: message.url,
@@ -93,13 +93,13 @@ $sendLocationButton.addEventListener('click', () => {
 
     $sendLocationButton.setAttribute('disabled', 'disabled')
 
-    
+
     socket.emit('sendLocation', {
         latitude: geoplugin_latitude(),
         longitude: geoplugin_longitude()
     }, () => {
         $sendLocationButton.removeAttribute('disabled')
-        console.log('Location shared!')  
+        //console.log('Location shared!')  
     }) 
 })
 //emitting join event from client
